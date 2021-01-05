@@ -7,6 +7,8 @@
  * Author: Chris Reynolds
  * Author URI: https://github.com/jazzsequence
  * License: GPLv3
+ *
+ * @package Dashboard-Changelog
  */
 
 /**
