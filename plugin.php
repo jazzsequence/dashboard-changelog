@@ -33,5 +33,6 @@ namespace jazzsequence\DashboardChangelog;
 
 require_once __DIR__ . '/inc/api.php';
 require_once __DIR__ . '/inc/namespace.php';
+require_once __DIR__ . '/inc/widget.php';
 
 add_action( 'plugins_loaded', __NAMESPACE__ . '\\bootstrap' );
