@@ -54,3 +54,24 @@ function get_code( array $response = [] ) {
 	$response = empty( $response ) ? get_data() : $response;
 	return wp_remote_retrieve_response_code( $response );
 }
+
+function get_body() {
+	$body = wp_cache_get( 'dc.api.cached_body' );
+
+	if ( ! $body ) {
+		$response = get_data();
+		$code     = get_code();
+
+		if ( 200 !== $code ) {
+			$body->code = $code;
+			$body->error = $response['response']['message'];
+			$body->message = sprintf( __( 'There was a problem fetching your repository. Check the %1$ssettings%2$s to make sure that you entered it in correctly.', 'js-dashboard-changelog' ), '<a href="options-general.php>', '</a>' );
+
+			return $body;
+		}
+
+		$body = wp_remote_retrieve_body( $response );
+	}
+
+	return json_decode( $body );
+}
