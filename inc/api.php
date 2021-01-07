@@ -49,3 +49,8 @@ function get_data( string $endpoint = '/releases' ) : array {
 
 	return $response;
 }
+
+function get_code( array $response = [] ) {
+	$response = empty( $response ) ? get_data() : $response;
+	return wp_remote_retrieve_response_code( $response );
+}
