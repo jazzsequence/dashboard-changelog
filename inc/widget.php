@@ -24,3 +24,28 @@ function register_dashboard_widget() {
 		 'high'
 	);
 }
+
+function render_dashboard_widget() {
+	$updates = API\get_body();
+	$body = '';
+	$body .= '<ul>';
+
+	if ( ! empty( $updates ) ) {
+		foreach ( $updates as $update ) {
+			$title = $update->name;
+			$version = $update->tag_name;
+			$description = $update->body;
+			$link = $update->html_url;
+
+			$body .= '<li class="entry">';
+			$body .= "<h3>$title</h3>";
+			$body .= wpautop( $description );
+			$body .= "<span class=\"version\"><a href=\"$link\">$version</a></span>";
+			$body .= '</li>';
+		}
+	}
+
+	$body .= '</ul>';
+
+	echo wp_kses_post( $body );
+}
