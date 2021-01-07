@@ -6,3 +6,5 @@
  */
 
 namespace jazzsequence\DashboardChangelog\Widget;
+
+use jazzsequence\DashboardChangelog\API;
