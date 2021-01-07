@@ -31,7 +31,11 @@ function add_setting() {
 		'dc-repo',
 		__( 'GitHub Repo', 'js-dashboard-changelog' ),
 		__NAMESPACE__ . '\\render_settings_field',
-		'general'
+		'general',
+		'default',
+		[
+			'label_for' => 'dc-repo'
+		]
 	);
 }
 
