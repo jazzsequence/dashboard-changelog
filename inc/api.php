@@ -75,3 +75,23 @@ function get_body() {
 
 	return json_decode( $body );
 }
+
+function get_name() {
+	$name = wp_cache_get( 'dc.api.cached_name' );
+
+	if ( ! $name ) {
+		$response = get_data( '' );
+		$code = get_code( $response );
+
+		if ( 200 !== $code ) {
+			return __( 'Error', 'js-dashboard-changelog' );
+		}
+
+		$body = json_decode( wp_remote_retrieve_body( $response ) );
+		$name = $body->name;
+
+		wp_cache_set( 'dc.api.cached_name', $name );
+	}
+
+	return $name;
+}
