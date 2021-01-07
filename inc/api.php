@@ -9,6 +9,8 @@
 
 namespace jazzsequence\DashboardChangelog\API;
 
+use jazzsequence\DashboardChangelog;
+
 /**
  * Return the API url.
  *
