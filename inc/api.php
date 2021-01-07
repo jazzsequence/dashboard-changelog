@@ -34,7 +34,7 @@ function api_url( string $path = '' ) : string {
  *
  * @return array An array of API response data.
  */
-function get_data() : array {
+function get_data( string $endpoint = '/releases' ) : array {
 	$response = wp_cache_get( 'dc.api.cached_data' );
 
 	if ( ! $response ) {
