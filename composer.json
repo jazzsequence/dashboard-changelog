@@ -1,0 +1,13 @@
+{
+    "name": "jazzsequence/dashboard-changelog",
+    "description": "Adds a GitHub release widget to your WordPress dashboard for a public GitHub repository.",
+    "type": "wordpress-plugin",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Chris Reynolds",
+            "email": "me@chrisreynolds.io"
+        }
+    ],
+    "require": {}
+}
