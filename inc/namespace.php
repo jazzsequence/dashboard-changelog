@@ -7,8 +7,6 @@
 
 namespace jazzsequence\DashboardChangelog;
 
-use jazzsequence\DashboardChangelog\API;
-
 /**
  * Kick it off!
  */
