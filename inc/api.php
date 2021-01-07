@@ -38,7 +38,7 @@ function get_data( string $endpoint = '/releases' ) : array {
 	$response = wp_cache_get( 'dc.api.cached_data' );
 
 	if ( ! $response ) {
-		$repository = DashboardChangelog\get_repository_option( 'repository' ); var_dump( api_url( $repository . $endpoint ) );
+		$repository = DashboardChangelog\get_repository_option( 'repository' );
 		$response = wp_remote_request( api_url( $repository . $endpoint ) );
 		$response_code = $response['response']['code'];
 
