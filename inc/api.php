@@ -38,9 +38,13 @@ function get_data( string $endpoint = '/releases' ) : array {
 	$response = wp_cache_get( 'dc.api.cached_data' );
 
 	if ( ! $response ) {
-		$repository = 'jazzsequence/jazzsequence.com';
-		$response = wp_remote_request( api_url( $repository ) );
-		wp_cache_set( 'dc.api.cached_data', $response, null, DAY_IN_SECONDS );
+		$repository = DashboardChangelog\get_repository_option( 'repository' ); var_dump( api_url( $repository . $endpoint ) );
+		$response = wp_remote_request( api_url( $repository . $endpoint ) );
+		$response_code = $response['response']['code'];
+
+		if ( $response_code === 200 ) {
+			wp_cache_set( 'dc.api.cached_data', $response, null, DAY_IN_SECONDS );
+		}
 	}
 
 	return $response;
