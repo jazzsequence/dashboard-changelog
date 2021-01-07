@@ -7,10 +7,14 @@
 
 namespace jazzsequence\DashboardChangelog;
 
+use jazzsequence\DashboardChangelog\Widget;
+
 /**
  * Kick it off!
  */
 function bootstrap() {
+	Widget\bootstrap();
+
 	add_action( 'admin_init', __NAMESPACE__ . '\\add_setting' );
 }
 
