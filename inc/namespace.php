@@ -15,7 +15,9 @@ use jazzsequence\DashboardChangelog\Widget;
 function bootstrap() {
 	Widget\bootstrap();
 
-	add_action( 'admin_init', __NAMESPACE__ . '\\add_setting' );
+	if ( ! defined( 'JSDC_REPOSITORY' ) ) {
+		add_action( 'admin_init', __NAMESPACE__ . '\\add_setting' );
+	}
 }
 
 /**
@@ -87,4 +89,15 @@ function render_settings_field() {
 		<?php esc_html_e( 'Add the repository user and name, e.g. jazzsequence/dashboard-changelog.', 'js-dashboard-changelog' ); ?>
 	</p>
 	<?php
+}
+
+/**
+ * Get the repository to fetch updates from.
+ */
+function get_repository() {
+	if ( defined( 'JSDC_REPOSITORY' ) ) {
+		return \JSDC_REPOSITORY;
+	}
+
+	return get_repository_option( 'repository' );
 }
