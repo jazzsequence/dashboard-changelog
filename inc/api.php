@@ -111,7 +111,7 @@ function get_name() : string {
 		}
 
 		$body = json_decode( wp_remote_retrieve_body( $response ) );
-		$name = $body->name;
+		$name = $body['name'];
 
 		// Don't expire the name. This should never change.
 		wp_cache_set( 'dc.api.cached_name', $name );
