@@ -51,13 +51,24 @@ function get_data( string $endpoint = '/releases' ) : array {
 	return $response;
 }
 
-function get_code( array $response = [] ) {
+/**
+ * Get the API response code.
+ *
+ * @param array $response
+ *
+ * @return int The HTTP API Response code.
+ */
 function get_code( array $response = [] ) : int {
 	$response = empty( $response ) ? get_data() : $response;
 	return wp_remote_retrieve_response_code( $response );
 }
 
-function get_body() {
+/**
+ * Get the API body content.
+ * If no content was able to be retrieved, return an error with an error message.
+ *
+ * @return object The body of the API response, or an object containing an error message and information about what went wrong.
+ */
 function get_body() : object {
 	$body = wp_cache_get( 'dc.api.cached_body' );
 
@@ -81,7 +92,13 @@ function get_body() : object {
 	return json_decode( $body );
 }
 
-function get_name() {
+/**
+ * Get the repository name from the API.
+ *
+ * This name is cached indefinitely as repository names should never change.
+ *
+ * @return string The repository name, or an error.
+ */
 function get_name() : string {
 	$name = wp_cache_get( 'dc.api.cached_name' );
 
