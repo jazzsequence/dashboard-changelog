@@ -54,10 +54,17 @@ function render_dashboard_widget() {
 	$body = '<ul>';
 	$i = 0;
 
+	/**
+	 * Allow the maximum number of releases to display to be filtered.
+	 *
+	 * @param int $max_display The number of release updates to display.
+	 */
+	$max_display = apply_filters( 'dc.widget.max_display', 3 );
+
 	if ( ! empty( $updates ) ) {
 		foreach ( $updates as $update ) {
 			// Only show the 3 most recent updates.
-			if ( $i >= 3 ) {
+			if ( $i >= $max_display ) {
 				continue;
 			}
 
