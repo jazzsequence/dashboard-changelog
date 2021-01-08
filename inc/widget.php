@@ -27,11 +27,16 @@ function register_dashboard_widget() {
 
 function render_dashboard_widget() {
 	$updates = API\get_body();
-	$body = '';
-	$body .= '<ul>';
+	$body = '<ul>';
+	$i = 0;
 
 	if ( ! empty( $updates ) ) {
 		foreach ( $updates as $update ) {
+			// Only show the 3 most recent updates.
+			if ( $i >= 3 ) {
+				continue;
+			}
+
 			$title = $update->name;
 			$version = $update->tag_name;
 			$description = $update->body;
@@ -42,6 +47,8 @@ function render_dashboard_widget() {
 			$body .= wpautop( $description );
 			$body .= "<span class=\"version\"><a href=\"$link\">$version</a></span>";
 			$body .= '</li>';
+
+			$i++;
 		}
 	}
 
