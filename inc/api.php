@@ -63,7 +63,8 @@ function get_body() : object {
 
 	if ( ! $body ) {
 		$response = get_data();
-		$code     = get_code();
+		$code = get_code();
+		$expire = DashboardChangelog\get_cache_expiration();
 
 		if ( 200 !== $code ) {
 			$body->code = $code;
@@ -74,6 +75,7 @@ function get_body() : object {
 		}
 
 		$body = wp_remote_retrieve_body( $response );
+		wp_cache_set( 'dc.api.cached_body', $body, null, $expire );
 	}
 
 	return json_decode( $body );
