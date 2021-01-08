@@ -100,7 +100,7 @@ function get_body() : array {
  * @return string The repository name, or an error.
  */
 function get_name() : string {
-	$name = wp_cache_get( 'dc.api.cached_name' );
+	$name = wp_cache_get( 'dc.api.cached_name' ) ?? '';
 
 	if ( ! $name ) {
 		$response = get_data( '' );
