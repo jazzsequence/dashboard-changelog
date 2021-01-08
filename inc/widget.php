@@ -24,12 +24,11 @@ function enqueue_styles( string $pagenow ) {
 }
 
 function register_dashboard_widget() {
-	wp_add_dashboard_widget(
+	add_meta_box(
 		'js-dashboard-changelog',
 		API\get_code() === 200 ? sprintf( __( '%s Updates', 'js-dashboard-changelog' ), API\get_name() ) : __( 'Error in Dashboard Changelog', 'js-dashboard-changelog' ),
 		 __NAMESPACE__ . '\\render_dashboard_widget',
-		 null,
-		 null,
+		 'dashboard',
 		 'side',
 		 'high'
 	);
