@@ -11,6 +11,16 @@ use jazzsequence\DashboardChangelog\API;
 
 function bootstrap() {
 	add_action( 'wp_dashboard_setup', __NAMESPACE__ . '\\register_dashboard_widget' );
+	add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\\enqueue_styles' );
+}
+
+function enqueue_styles( string $pagenow ) {
+	// Bail if we're not on the dashboard.
+	if ( $pagenow !== 'index.php' ) {
+		return;
+	}
+
+	wp_enqueue_style( 'dashboard-changelog', plugin_dir_url( dirname( __FILE__ ) ) . 'dist/css/style.css', [], '1.0.0', 'screen' );
 }
 
 function register_dashboard_widget() {
