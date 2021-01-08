@@ -1,0 +1,35 @@
+{
+  "name": "dashboard-changelog",
+  "version": "1.0.0",
+  "description": "Adds a GitHub release widget to your WordPress dashboard for a public GitHub repository.",
+  "main": "plugin.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jazzsequence/dashboard-changelog.git"
+  },
+  "keywords": [
+    "WordPress",
+    "GitHub",
+    "changelog",
+    "dashboard",
+    "widget"
+  ],
+  "author": "Chris Reynolds <me@chrisreynolds.io>",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/jazzsequence/dashboard-changelog/issues"
+  },
+  "homepage": "https://github.com/jazzsequence/dashboard-changelog#readme",
+  "devDependencies": {
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-csso": "^4.0.1",
+    "gulp-sass": "^4.1.0",
+    "gulp-terser": "^2.0.0",
+    "node-sass": "^4.14.1"
+  }
+}
