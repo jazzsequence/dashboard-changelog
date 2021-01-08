@@ -1,0 +1,21 @@
+#js-dashboard-changelog {
+	li.entry {
+		clear: right;
+		border-bottom: 1px solid #eee;
+		padding-bottom: 10px;
+
+		&:last-of-type {
+			border-bottom: none;
+			padding-bottom: 0;
+		}
+
+		h3 {
+			font-weight: 600;
+		}
+
+		.version {
+			float: right;
+			margin-top: -16px;
+		}
+	}
+}
