@@ -69,7 +69,7 @@ function get_code( array $response = [] ) : int {
  *
  * @return object The body of the API response, or an object containing an error message and information about what went wrong.
  */
-function get_body() : object {
+function get_body() : array {
 	$body = wp_cache_get( 'dc.api.cached_body' );
 
 	if ( ! $body ) {
@@ -78,9 +78,9 @@ function get_body() : object {
 		$expire = DashboardChangelog\get_cache_expiration();
 
 		if ( 200 !== $code ) {
-			$body->code = $code;
-			$body->error = $response['response']['message'];
-			$body->message = sprintf( __( 'There was a problem fetching your repository. Check the %1$ssettings%2$s to make sure that you entered it in correctly.', 'js-dashboard-changelog' ), '<a href="options-general.php>', '</a>' );
+			$body['code'] = $code;
+			$body['error'] = $response['response']['message'];
+			$body['message'] = sprintf( __( 'There was a problem fetching your repository. Check the %1$ssettings%2$s to make sure that you entered it in correctly.', 'js-dashboard-changelog' ), '<a href="options-general.php>', '</a>' );
 
 			return $body;
 		}
