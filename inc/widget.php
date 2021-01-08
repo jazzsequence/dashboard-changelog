@@ -51,6 +51,19 @@ function register_dashboard_widget() {
  */
 function render_dashboard_widget() {
 	$updates = API\get_body();
+
+	// If there was an error, display the error message and bail.
+	if ( isset( $updates['error'] ) ) {
+		$error = wpautop( $updates['message'] );
+		$error .= '<div class="error">';
+		$error .= '<span class="error-code">' . sprintf( esc_html__( 'Error %d', 'js-dashboard-changelog' ), $updates['code'] ) . '</span>';
+		$error .= '<span class="error-message">' . $updates['error'] . '</span>';
+		$error .= '</div>';
+
+		echo wp_kses_post( $error );
+		return;
+	}
+
 	$body = '<ul>';
 	$i = 0;
 
