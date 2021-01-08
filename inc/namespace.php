@@ -19,6 +19,21 @@ function bootstrap() {
 }
 
 /**
+ * Get the cache expiration time.
+ * We default to one day, but this can be filtered.
+ *
+ * @return int The cache expiration time.
+ */
+function get_cache_expiration() : int {
+	/**
+	 * Allow the expiration time to be filtered. Default to DAY_IN_SECONDS.
+	 *
+	 * @param int $expire The length to retain cached response codes.
+	 */
+	return apply_filters( 'dc.api.api_expiration', DAY_IN_SECONDS );
+}
+
+/**
  * Register the setting and add the field.
  */
 function add_setting() {
