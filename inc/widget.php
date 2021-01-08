@@ -9,11 +9,19 @@ namespace jazzsequence\DashboardChangelog\Widget;
 
 use jazzsequence\DashboardChangelog\API;
 
+/**
+ * Initialize the Widget.
+ */
 function bootstrap() {
 	add_action( 'wp_dashboard_setup', __NAMESPACE__ . '\\register_dashboard_widget' );
 	add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\\enqueue_styles' );
 }
 
+/**
+ * Enqueue the styles, but only on the main WordPress dashboard page.
+ *
+ * @param string $pagenow
+ */
 function enqueue_styles( string $pagenow ) {
 	// Bail if we're not on the dashboard.
 	if ( $pagenow !== 'index.php' ) {
@@ -23,6 +31,9 @@ function enqueue_styles( string $pagenow ) {
 	wp_enqueue_style( 'dashboard-changelog', plugin_dir_url( dirname( __FILE__ ) ) . 'dist/css/style.css', [], '1.0.0', 'screen' );
 }
 
+/**
+ * Register the dashboard widget.
+ */
 function register_dashboard_widget() {
 	add_meta_box(
 		'js-dashboard-changelog',
@@ -34,6 +45,10 @@ function register_dashboard_widget() {
 	);
 }
 
+/**
+ * Display the dashboard widget.
+ * Widget displays the 3 most recent GitHub releases.
+ */
 function render_dashboard_widget() {
 	$updates = API\get_body();
 	$body = '<ul>';
