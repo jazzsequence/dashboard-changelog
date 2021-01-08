@@ -52,11 +52,13 @@ function get_data( string $endpoint = '/releases' ) : array {
 }
 
 function get_code( array $response = [] ) {
+function get_code( array $response = [] ) : int {
 	$response = empty( $response ) ? get_data() : $response;
 	return wp_remote_retrieve_response_code( $response );
 }
 
 function get_body() {
+function get_body() : object {
 	$body = wp_cache_get( 'dc.api.cached_body' );
 
 	if ( ! $body ) {
@@ -78,6 +80,7 @@ function get_body() {
 }
 
 function get_name() {
+function get_name() : string {
 	$name = wp_cache_get( 'dc.api.cached_name' );
 
 	if ( ! $name ) {
