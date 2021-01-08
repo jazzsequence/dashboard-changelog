@@ -1,9 +1,9 @@
 # Dashboard Changelog
 
-**Contributors:** [Chris Reynolds](https://chrisreynolds.io)
-**Donate link:** https://paypal.me/jazzsequence
-**License:** GPLv3
-**License URI:** https://www.gnu.org/licenses/gpl-3.0.html
+**Contributors:** [Chris Reynolds](https://chrisreynolds.io)  
+**Donate link:** https://paypal.me/jazzsequence  
+**License:** GPLv3  
+**License URI:** https://www.gnu.org/licenses/gpl-3.0.html  
 
 Adds a GitHub release widget to your WordPress dashboard for a public GitHub repository.
 
