@@ -49,3 +49,8 @@ By default, we display 3 updates (releases) from the API, but this can be update
 
 #### Parameters
 **`$max_display`** _(int)_ The number of release updates to display.
+
+## `JSDC_REPOSITORY`
+Global constant that can be used to hard-code the repository. If defined, the setting does not display in general settings. This constant can be defined in the `wp-config.php` file or elsewhere.
+
+**Note:** No validation is done at all on this string, so make sure it's saved in the proper format.
