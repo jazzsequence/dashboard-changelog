@@ -21,6 +21,6 @@ gulp.task( 'build', gulp.series( [ 'clean', 'styles' ] ) );
 
 gulp.task( 'watch', () => {
 	gulp.watch( 'assets/sass/**/*.scss', done => {
-		gulp.series( [ 'clean:css', 'styles' ] )( done );
+		gulp.series( [ 'clean', 'styles' ] )( done );
 	} );
 } );
