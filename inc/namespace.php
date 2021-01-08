@@ -30,7 +30,7 @@ function get_cache_expiration() : int {
 	 *
 	 * @param int $expire The length to retain cached response codes.
 	 */
-	return apply_filters( 'dc.api.api_expiration', DAY_IN_SECONDS );
+	return apply_filters( 'dc.api_expiration', DAY_IN_SECONDS );
 }
 
 /**
