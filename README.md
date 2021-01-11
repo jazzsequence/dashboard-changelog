@@ -13,6 +13,9 @@ Adds a GitHub release widget to your WordPress dashboard for a public GitHub rep
 2. Activate Dashboard Changelog through the 'Plugins' menu in WordPress.
 3. Go to your General Settings page, and add the repository you'd like to display updates from in <owner>/<repository-name> format (e.g. `jazzsequence/dashboard-changelog`).
 
+## How to use ##
+By default, Dashboard Changelog will pull updates from GitHub _releases_, with the body content of each release acting as content for each update. In order to use, your repository will need to use releases. (The GitHub API endpoint can be modified to use any endpoint that is available, however additional customization would likely need to be done to format the data that gets pulled into the update.) The plugin will pull the 3 most recent releases and cache the API data for 24 hours.
+
 ## Screenshots ##
 
 ![Dashboard changelog appearance](https://i.imgur.com/HxQ52rS.png)
