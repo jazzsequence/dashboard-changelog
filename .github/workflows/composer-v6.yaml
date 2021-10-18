@@ -19,5 +19,5 @@ jobs:
           composer_version: 2
           php_version: 7.4
           command:
-            bin/install-wp-tests.sh
+            bash bin/install-wp-tests.sh
             vendor/bin/phpunit
