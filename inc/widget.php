@@ -7,6 +7,7 @@
 
 namespace jazzsequence\DashboardChangelog\Widget;
 
+use function jazzsequence\DashboardChangelog\parsedown_enabled;
 use jazzsequence\DashboardChangelog\API;
 use Parsedown;
 
@@ -86,7 +87,8 @@ function render_dashboard_widget() {
 
 			$title = $update->name;
 			$version = $update->tag_name;
-			$description = $update->body;
+			// If we have Parsedown, use it. Otherwise just use wpautop for basic parsing.
+			$description = parsedown_enabled() ? $parsedown->text( $update->body ) : wpautop( $update->body );
 			$link = $update->html_url;
 
 			$body .= '<li class="entry">';
