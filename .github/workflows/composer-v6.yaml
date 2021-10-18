@@ -13,10 +13,11 @@ jobs:
         with:
           composer_version: 2
           php_version: 7.4
-          command: composer run install-wpunit
       - name: Run tests
         uses: php-actions/composer@v6
         with:
           composer_version: 2
           php_version: 7.4
-          command: composer run phpunit
+          command:
+            bin/install-wp-tests.sh
+            vendor/bin/phpunit
