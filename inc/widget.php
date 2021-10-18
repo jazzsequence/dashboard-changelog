@@ -51,6 +51,8 @@ function register_dashboard_widget() {
  * Widget displays the 3 most recent GitHub releases.
  */
 function render_dashboard_widget() {
+	$parsedown = new Parsedown();
+	$parsedown->setMarkupEscaped( true ); // Sanitize Markdown.
 	$updates = API\get_body();
 
 	// If there was an error, display the error message and bail.
