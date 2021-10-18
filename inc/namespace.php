@@ -51,7 +51,7 @@ function parsedown_enabled() : bool {
  * @return string
  */
 function get_vendor_dir() : string {
-	return dirname( __DIR__, 2 ) . '/vendor/';
+	return dirname( __DIR__ ) . '/vendor/';
 }
 
 /**
