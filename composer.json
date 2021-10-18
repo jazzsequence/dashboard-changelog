@@ -9,5 +9,7 @@
             "email": "me@chrisreynolds.io"
         }
     ],
-    "require": {}
+    "require": {
+        "erusev/parsedown": "^1.7"
+    }
 }
