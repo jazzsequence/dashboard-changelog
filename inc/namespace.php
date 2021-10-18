@@ -16,7 +16,7 @@ function bootstrap() {
 	Widget\bootstrap();
 
 	if ( parsedown_enabled() ) {
-		require_once $composer_autoload;
+		require_once composer_autoloader();
 	}
 
 	if ( ! defined( 'JSDC_REPOSITORY' ) ) {
