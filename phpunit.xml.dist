@@ -1,4 +1,4 @@
-<phpunit bootstrap="tests/bootstrap">
+<phpunit bootstrap="tests/bootstrap.php">
 	<testsuites>
 		<testsuite>
 			<directory prefix="class-" suffix=".php">./tests/</directory>
