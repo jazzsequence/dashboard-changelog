@@ -2,30 +2,31 @@ name: Composer (php-actions)
 
 on: [push]
 
-services:
-  mysql:
-    image: mysql:5.7
-    env:
-      MYSQL_DATABASE: wordpress
-    ports:
-      - 33306:3306
-    options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install dependencies
-        uses: php-actions/composer@v6
-        with:
-          composer_version: 2
-          php_version: 7.4
-          args: --dev
-      - name: Run tests
-        uses: php-actions/composer@v6
-        with:
-          composer_version: 2
-          php_version: 7.4
-          command: run phpunit
+  services:
+    mysql:
+      image: mysql:5.7
+      ports:
+        - 33306:3306
+      env:
+        MYSQL_DATABASE: wordpress
+      options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+  steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      uses: php-actions/composer@v6
+      with:
+        composer_version: 2
+        php_version: 7.4
+        args: --dev
+    - name: Run tests
+      uses: php-actions/composer@v6
+      with:
+        composer_version: 2
+        php_version: 7.4
+        command: run phpunit
