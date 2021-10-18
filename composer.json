@@ -11,7 +11,7 @@
     ],
     "scripts": {
         "phpunit": "vendor/bin/phpunit",
-        "install-wpunit": "bash bin/install-wp-tests.sh localhost root ''"
+        "install-wpunit": "bash bin/install-database.sh wordpress root ''"
     },
     "require": {
         "erusev/parsedown": "^1.7",
