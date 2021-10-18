@@ -16,7 +16,7 @@ jobs:
       - name: Install WP Unit
         uses: php-actions/composer@v6
         with:
-          command: run install-wptests
+          command: run install-wpunit
       - name: Run tests
         uses: php-actions/composer@v6
         with:
