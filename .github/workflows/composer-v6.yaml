@@ -14,8 +14,15 @@ jobs:
           composer_version: 2
           php_version: 7.4
           args: --dev
-          command: run install-wpunit
       - name: Run tests
+        services:
+          mysql:
+            image: mysql:5.7
+            env:
+              MYSQL_DATABASE: wordpress
+            ports:
+              - 33306:3306
+            options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
         uses: php-actions/composer@v6
         with:
           composer_version: 2
