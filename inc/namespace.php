@@ -20,6 +20,24 @@ function bootstrap() {
 	}
 }
 
+/**
+ * Determines whether Parsedown should be enabled.
+ *
+ * @return bool
+ */
+function parsedown_enabled() : bool {
+	// Bail if the autoloader doesn't exist.
+	if ( ! file_exists( composer_autoloader() ) ) {
+		return false;
+	}
+
+	// Bail if the Parsedown library doesn't exist.
+	if ( ! file_exists( get_vendor_dir() . 'erusev/parsedown/Parsedown.php' ) ) {
+		return false;
+	}
+
+	return true;
+}
 
 /**
  * Returns the vendor directory.
