@@ -20,6 +20,16 @@ function bootstrap() {
 	}
 }
 
+
+/**
+ * Returns the vendor directory.
+ *
+ * @return string
+ */
+function get_vendor_dir() : string {
+	return dirname( __DIR__, 2 ) . '/vendor/';
+}
+
 /**
  * Get the cache expiration time.
  * We default to one day, but this can be filtered.
