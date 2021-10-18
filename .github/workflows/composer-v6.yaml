@@ -13,12 +13,6 @@ jobs:
         with:
           composer_version: 2
           php_version: 7.4
-      - name: Install WP Unit
-        uses: php-actions/composer@v6
-        with:
-          command: |
-            apt-get install svn
-            run install-wpunit
       - name: Run tests
         uses: php-actions/composer@v6
         with:
