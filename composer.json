@@ -9,7 +9,17 @@
             "email": "me@chrisreynolds.io"
         }
     ],
+    "scripts": {
+        "phpunit": "vendor/bin/phpunit",
+        "install-wpunit": "bash bin/install-database.sh wordpress root ''"
+    },
     "require": {
-        "erusev/parsedown": "^1.7"
+        "erusev/parsedown": "^1.7",
+        "php": ">=7.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.5",
+        "roots/wordpress": "^5.0",
+        "wp-phpunit/wp-phpunit": "^5.8"
     }
 }

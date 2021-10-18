@@ -7,7 +7,9 @@
 
 namespace jazzsequence\DashboardChangelog\Widget;
 
+use function jazzsequence\DashboardChangelog\parsedown_enabled;
 use jazzsequence\DashboardChangelog\API;
+use Parsedown;
 
 /**
  * Initialize the Widget.
@@ -50,6 +52,8 @@ function register_dashboard_widget() {
  * Widget displays the 3 most recent GitHub releases.
  */
 function render_dashboard_widget() {
+	$parsedown = new Parsedown();
+	$parsedown->setMarkupEscaped( true ); // Sanitize Markdown.
 	$updates = API\get_body();
 
 	// If there was an error, display the error message and bail.
@@ -83,12 +87,13 @@ function render_dashboard_widget() {
 
 			$title = $update->name;
 			$version = $update->tag_name;
-			$description = $update->body;
+			// If we have Parsedown, use it. Otherwise just use wpautop for basic parsing.
+			$description = parsedown_enabled() ? $parsedown->text( $update->body ) : wpautop( $update->body );
 			$link = $update->html_url;
 
 			$body .= '<li class="entry">';
 			$body .= "<h3>$title</h3>";
-			$body .= wpautop( $description );
+			$body .= $description;
 			$body .= "<span class=\"version\"><a href=\"$link\">$version</a></span>";
 			$body .= '</li>';
 
