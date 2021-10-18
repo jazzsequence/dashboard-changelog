@@ -7,26 +7,36 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-  services:
-    mysql:
-      image: mysql:5.7
-      ports:
-        - 33306:3306
-      env:
-        MYSQL_DATABASE: wordpress
-      options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    services:
+      mariadb:
+        image: mariadb:latest
+        ports:
+          - 3306
+        env:
+          MYSQL_DATABASE: wordpress
+        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
 
-  steps:
-    - uses: actions/checkout@v2
-    - name: Install dependencies
-      uses: php-actions/composer@v6
-      with:
-        composer_version: 2
-        php_version: 7.4
-        args: --dev
-    - name: Run tests
-      uses: php-actions/composer@v6
-      with:
-        composer_version: 2
-        php_version: 7.4
-        command: run phpunit
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Verify MariaDB connection
+        env:
+          PORT: ${{ job.services.mariadb.ports[3306] }}
+        run: |
+          while ! mysqladmin ping -h"127.0.0.1" -P"$PORT" --silent; do
+            sleep 1
+          done
+
+      - name: Install dependencies
+        uses: php-actions/composer@v6
+        with:
+          composer_version: 2
+          php_version: 7.4
+          args: --dev
+
+      - name: Run tests
+        uses: php-actions/composer@v6
+        with:
+          composer_version: 2
+          php_version: 7.4
+          command: run phpunit
