@@ -1,0 +1,16 @@
+name: Composer (php-actions)
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      uses: actions/checkout@v2
+
+      - name: Install dependencies
+        uses: php-actions/composer@v6
+        with:
+          composer_version: 2
+          php_version: 8.0
