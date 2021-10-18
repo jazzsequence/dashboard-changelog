@@ -10,6 +10,7 @@
         }
     ],
     "require": {
-        "erusev/parsedown": "^1.7"
+        "erusev/parsedown": "^1.7",
+        "phpunit/phpunit": "^9.5"
     }
 }
