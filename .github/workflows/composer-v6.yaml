@@ -2,21 +2,9 @@ name: Composer (php-actions)
 
 on: [push]
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    services:
-      mariadb:
-        image: mariadb:latest
-        ports:
-          - 3306
-        env:
-          MYSQL_USER: wordpress
-          MYSQL_PASSWORD: wordpress
-          MYSQL_DATABASE: wordpress
-        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=15s --health-retries=3
 
     steps:
       - uses: actions/checkout@v2
@@ -25,14 +13,3 @@ jobs:
         uses: php-actions/composer@v6
         with:
           composer_version: 2
-          php_version: 7.4
-          args: --dev
-
-      - name: Run tests
-        uses: php-actions/composer@v6
-        with:
-          composer_version: 2
-          php_version: 7.4
-          command: |
-            run install-wpunit
-            run phpunit
