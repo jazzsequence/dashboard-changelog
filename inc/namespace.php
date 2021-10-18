@@ -31,6 +31,15 @@ function get_vendor_dir() : string {
 }
 
 /**
+ * Returns the path to the Composer autoload file.
+ *
+ * @return string
+ */
+function composer_autoloader() : string {
+	return get_vendor_dir() . 'autoload.php';
+}
+
+/**
  * Get the cache expiration time.
  * We default to one day, but this can be filtered.
  *
