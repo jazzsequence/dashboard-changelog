@@ -93,7 +93,7 @@ function render_dashboard_widget() {
 
 			$body .= '<li class="entry">';
 			$body .= "<h3>$title</h3>";
-			$body .= wpautop( $description );
+			$body .= $description;
 			$body .= "<span class=\"version\"><a href=\"$link\">$version</a></span>";
 			$body .= '</li>';
 
