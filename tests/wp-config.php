@@ -32,8 +32,8 @@ define( 'WP_DEBUG', true );
 // DO NOT use a production database or one that is shared with something else.
 
 define( 'DB_NAME'       , getenv( 'WP_DB_NAME' ) ?: 'wordpress' );
-define( 'DB_USER'       , getenv( 'WP_DB_USER' ) ?: 'root' );
-define( 'DB_PASSWORD'   , getenv( 'WP_DB_PASS' ) ?: '' );
+define( 'DB_USER'       , getenv( 'WP_DB_USER' ) ?: 'wordpress' );
+define( 'DB_PASSWORD'   , getenv( 'WP_DB_PASS' ) ?: 'wordpress' );
 define( 'DB_HOST'       , 'localhost' );
 define( 'DB_CHARSET'    , 'utf8' );
 define( 'DB_COLLATE'    , '' );
