@@ -15,6 +15,10 @@ use jazzsequence\DashboardChangelog\Widget;
 function bootstrap() {
 	Widget\bootstrap();
 
+	if ( parsedown_enabled() ) {
+		require_once $composer_autoload;
+	}
+
 	if ( ! defined( 'JSDC_REPOSITORY' ) ) {
 		add_action( 'admin_init', __NAMESPACE__ . '\\add_setting' );
 	}
