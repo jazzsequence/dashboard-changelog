@@ -103,7 +103,7 @@ function add_setting() {
  * Display the input field for the GitHub repository.
  */
 function render_settings_field() {
-	$repo = get_repository_option( 'repository' );
+	$repo = get_option( 'dc-repo' );
 
 	?>
 	<input type="text" id="dc-repo" class="regular-text" name="dashboard_changelog[repository]" value="<?php echo esc_attr( $repo ); ?>" />
@@ -122,5 +122,5 @@ function get_repository() {
 		return \JSDC_REPOSITORY;
 	}
 
-	return get_repository_option( 'repository' );
+	return get_option( 'dc-repo' );
 }
