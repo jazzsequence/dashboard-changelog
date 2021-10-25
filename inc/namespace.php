@@ -82,11 +82,6 @@ function get_cache_expiration() : int {
  * Register the setting and add the field.
  */
 function add_setting() {
-	register_setting( 'general', 'dashboard_changelog', [
-		'sanitize_callback' => 'sanitize_text_field',
-		'default' => null,
-	] );
-
 	add_settings_field(
 		'dc-repo',
 		__( 'GitHub Repo', 'js-dashboard-changelog' ),
@@ -97,26 +92,11 @@ function add_setting() {
 			'label_for' => 'dc-repo'
 		]
 	);
-}
 
-/**
- * Get the Dashboard Changelog options.
- *
- * @param string $option  The option to retrieve.
- * @param string $default (Optional) A default value.
- */
-function get_repository_option( $option = '', $default = '' ) {
-	$options = get_option( 'dashboard_changelog' );
-
-	if ( empty( $option ) ) {
-		return $options;
-	}
-
-	if ( ! isset( $options[ $option ] ) ) {
-		return $default;
-	}
-
-	return $options[ $option ];
+		register_setting( 'general', 'dc-repo', [
+			'sanitize_callback' => 'sanitize_text_field',
+			'default' => null,
+		] );
 }
 
 /**
