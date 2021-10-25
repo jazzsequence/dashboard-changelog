@@ -106,7 +106,7 @@ function render_settings_field() {
 	$repo = get_option( 'dc-repo' );
 
 	?>
-	<input type="text" id="dc-repo" class="regular-text" name="dashboard_changelog[repository]" value="<?php echo esc_attr( $repo ); ?>" />
+	<input type="text" id="dc-repo" class="regular-text" name="dc-repo" value="<?php echo esc_attr( $repo ); ?>" />
 
 	<p class="description">
 		<?php esc_html_e( 'Add the repository user and name, e.g. jazzsequence/dashboard-changelog.', 'js-dashboard-changelog' ); ?>
