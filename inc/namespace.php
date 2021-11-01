@@ -30,15 +30,8 @@ function bootstrap() {
  * @return bool
  */
 function parsedown_enabled() : bool {
-	// Bail if the autoloader doesn't exist.
-	if ( ! file_exists( composer_autoloader() ) ) {
-		error_log( __( 'Autoloader file not found.', 'dashboard-changelog' ) );
-		return false;
-	}
-
-	// Bail if the Parsedown library doesn't exist.
-	if ( ! file_exists( get_vendor_dir() . 'erusev/parsedown/Parsedown.php' ) ) {
-		error_log( __( 'Parsedown file does not exist', 'dashboard-changelog' ) );
+	if ( ! class_exists( 'Parsedown' ) ) { var_dump( 'no parsedown' );
+		error_log( __( 'Parsedown class does not exist.', 'dashboard-changelog' ) );
 		return false;
 	}
 
