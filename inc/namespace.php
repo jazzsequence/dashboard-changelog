@@ -16,7 +16,11 @@ function bootstrap() {
 	Widget\bootstrap();
 
 	if ( ! defined( 'JSDC_REPOSITORY' ) ) {
-		add_action( 'admin_init', __NAMESPACE__ . '\\add_setting' );
+		add_action( 'admin_init', __NAMESPACE__ . '\\add_repo_setting' );
+	}
+
+	if ( ! defined( 'JSDC_PAT' ) ) {
+		add_action( 'admin_init', __NAMESPACE__ . '\\add_pat_setting' );
 	}
 }
 
@@ -50,13 +54,13 @@ function get_cache_expiration() : int {
 }
 
 /**
- * Register the setting and add the field.
+ * Register the repo setting and add the field.
  */
-function add_setting() {
+function add_repo_setting() {
 	add_settings_field(
 		'dc-repo',
 		__( 'GitHub Repo', 'js-dashboard-changelog' ),
-		__NAMESPACE__ . '\\render_settings_field',
+		__NAMESPACE__ . '\\render_repo_settings_field',
 		'general',
 		'default',
 		[
@@ -64,16 +68,37 @@ function add_setting() {
 		]
 	);
 
-		register_setting( 'general', 'dc-repo', [
-			'sanitize_callback' => 'sanitize_text_field',
-			'default' => null,
-		] );
+	register_setting( 'general', 'dc-repo', [
+		'sanitize_callback' => 'sanitize_text_field',
+		'default' => null,
+	] );
+}
+
+/**
+ * Register the PAT setting and add the field.
+ */
+function add_pat_setting() {
+	add_settings_field(
+		'dc-pat',
+		__( 'GitHub Personal Access Token', 'js-dashboard-changelog' ),
+		__NAMESPACE__ . '\\render_pat_settings_field',
+		'general',
+		'default',
+		[
+			'label_for' => 'dc-pat'
+		]
+	);
+
+	register_setting( 'general', 'dc-pat', [
+		'sanitize_callback' => 'sanitize_text_field',
+		'default' => null,
+	] );
 }
 
 /**
  * Display the input field for the GitHub repository.
  */
-function render_settings_field() {
+function render_repo_settings_field() {
 	$repo = get_option( 'dc-repo' );
 
 	?>
@@ -86,6 +111,22 @@ function render_settings_field() {
 }
 
 /**
+ * Display the input field for the GitHub personal acess token.
+ */
+function render_pat_settings_field() {
+	$pat = get_option( 'dc-pat' );
+
+	?>
+	<input type="password" id="dc-pat" class="regular-text" name="dc-pat" value="<?php echo esc_attr( $pat ); ?>" />
+
+	<p class="description">
+		<?php esc_html_e( 'Add a personal access token with read scope on your private repo.', 'js-dashboard-changelog' ); ?>
+	</p>
+	<?php
+}
+
+
+/**
  * Get the repository to fetch updates from.
  */
 function get_repository() {
@@ -94,4 +135,15 @@ function get_repository() {
 	}
 
 	return get_option( 'dc-repo' );
+}
+
+/**
+ * Get the personal access token to access private GH repo.
+ */
+function get_pat() {
+	if ( defined( 'JSDC_PAT' ) ) {
+		return \JSDC_PAT;
+	}
+
+	return get_option( 'dc-pat' );
 }
