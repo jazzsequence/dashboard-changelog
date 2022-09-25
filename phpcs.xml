@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+
+<ruleset name="PHP_CodeSniffer">
+
+	<description>PHP Code Sniffer configuration file.</description>
+
+	<file>ajax/</file>
+	<file>backend/</file>
+	<file>frontend/</file>
+	<file>cli/</file>
+	<file>engine/</file>
+	<file>functions/</file>
+	<file>internals/</file>
+	<file>integrations/</file>
+	<file>rest/</file>
+	<file>templates/</file>
+	<file>tests/</file>
+	<file>helper/</file>
+	<file>.</file>
+
+	<!-- exclude our migrations directory from the violation check-->
+	<exclude-pattern>vendor</exclude-pattern>
+	<exclude-pattern>_wordpress</exclude-pattern>
+	<exclude-pattern>node_modules</exclude-pattern>
+	<exclude-pattern>*/src/*</exclude-pattern>
+	<exclude-pattern>*/tests/*</exclude-pattern>
+	<exclude-pattern>wp-config-test.php</exclude-pattern>
+	<exclude-pattern>*\.(inc|css|js)</exclude-pattern>
+
+	<!-- ignore warnings and display ERRORS only -->
+	<arg value="np" />
+
+	<!-- Include the WordPress-Extra standard. -->
+	<rule ref="NeutronStandard">
+		<!--
+		We may want a middle ground though. The best way to do this is add the
+		entire ruleset, then rule by rule, remove ones that don't suit a project.
+		We can do this by running `phpcs` with the '-s' flag, which allows us to
+		see the names of the sniffs reporting errors.
+		Once we know the sniff names, we can opt to exclude sniffs which don't
+		suit our project like so.
+		The below two examples just show how you can exclude rules.
+		They are not intended as advice about which sniffs to exclude.
+		-->
+
+		<!--
+		<exclude name="WordPress.WhiteSpace.ControlStructureSpacing"/>
+		<exclude name="WordPress.Security.EscapeOutput"/>
+		-->
+		<exclude name="PEAR.NamingConventions.ValidClassName.Invalid" />
+		<exclude name="NeutronStandard.Globals.DisallowGlobalFunctions.GlobalFunctions" />
+
+		<exclude name="NeutronStandard.Constants.DisallowDefine.Define" />
+
+
+	</rule>
+	<rule ref="WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase">
+		<exclude-pattern>tests/*</exclude-pattern>
+	</rule>
+	<rule ref="WordPress">
+		<exclude name="WordPress.WP.I18n.NonSingularStringLiteralDomain" />
+		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase" />
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName" />
+		<exclude name="WordPress.WP.I18n.NonSingularStringLiteralText" />
+		<exclude name="WordPress.WP.I18n.InterpolatedVariableText" />
+		<exclude name="WordPress.WP.EnqueuedResourceParameters.MissingVersion" />
+		<exclude name="WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase" />
+		<exclude name="WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase" />
+		<exclude name="WordPress.NamingConventions.ValidVariableName.PropertyNotSnakeCase" />
+		<exclude name="Generic.Arrays.DisallowShortArraySyntax.Found" />
+		<exclude name="WordPress.PHP.YodaConditions" />
+	</rule>
+	<rule ref="Squiz.Commenting.InlineComment.InvalidEndChar">
+		<type>warning</type>
+	</rule>
+	<rule ref="WordPress.Security.ValidatedSanitizedInput">
+		<type>warning</type>
+	</rule>
+	<rule ref="Squiz.Commenting">
+		<exclude name="Squiz.Commenting.PostStatementComment.Found" />
+		<exclude name="Squiz.Commenting.LongConditionClosingComment.Missing" />
+		<exclude name="Squiz.Commenting.LongConditionClosingComment.Invalid" />
+		<exclude name="Squiz.Commenting.FunctionComment.Missing" />
+		<exclude name="Squiz.Commenting.FunctionCommentThrowTag.Missing" />
+		<exclude name="Squiz.Commenting.FileComment.SpacingAfterOpen" />
+		<exclude name="Squiz.Commenting.FileComment.SpacingAfterComment" />
+		<exclude name="Squiz.Commenting.FileComment.WrongStyle" />
+		<exclude name="Squiz.Commenting.FileComment.SpacingAfterOpen" />
+	</rule>
+	<rule ref="PHPCompatibility"></rule>
+	<!-- <rule ref="SlevomatCodingStandard"></rule> -->
+</ruleset>
