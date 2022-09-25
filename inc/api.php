@@ -39,7 +39,13 @@ function get_data( string $endpoint = '/releases' ) : array {
 
 	if ( ! $response ) {
 		$repository = DashboardChangelog\get_repository();
-		$response = wp_remote_request( api_url( $repository . $endpoint ) );
+		$pat = DashboardChangelog\get_pat();
+		$args = [
+			'headers'     => [
+				'Authorization' => 'token ' . $pat
+			]
+		];
+		$response = wp_remote_request( api_url( $repository . $endpoint ), $args );
 		$response_code = $response['response']['code'];
 		$expire = DashboardChangelog\get_cache_expiration();
 
