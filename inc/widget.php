@@ -85,14 +85,12 @@ function render_dashboard_widget() {
 				continue;
 			}
 
-			$title = $update->name;
 			$version = $update->tag_name;
 			// If we have Parsedown, use it. Otherwise just use wpautop for basic parsing.
 			$description = parsedown_enabled() ? $parsedown->text( $update->body ) : wpautop( $update->body );
 			$link = $update->html_url;
 
 			$body .= '<li class="entry">';
-			$body .= "<h3>$title</h3>";
 			$body .= $description;
 			$body .= "<span class=\"version\"><a href=\"$link\">$version</a></span>";
 			$body .= '</li>';
