@@ -9,6 +9,7 @@ namespace jazzsequence\DashboardChangelog\Widget;
 
 use function jazzsequence\DashboardChangelog\parsedown_enabled;
 use jazzsequence\DashboardChangelog\API;
+use jazzsequence\DashboardChangelog;
 use Stichoza\GoogleTranslate\GoogleTranslate;
 use Parsedown;
 
@@ -89,12 +90,16 @@ function render_dashboard_widget() {
 			$version = $update->tag_name;
 			// If we have Parsedown, use it. Otherwise just use wpautop for basic parsing.
 			$description = parsedown_enabled() ? $parsedown->text( $update->body ) : wpautop( $update->body );
-			$tr = new GoogleTranslate(get_locale());
-			$tr->setSource('en');
 			$link = $update->html_url;
 
 			$body .= '<li class="entry">';
-			$body .= $tr->translate($description);
+			if (DashboardChangelog\should_translate()) {
+				$tr = new GoogleTranslate(get_locale());
+				$tr->setSource();
+				$body .= $tr->translate($description);
+			} else {
+				$body .= $description;
+			}
 			$body .= "<span class=\"version\"><a href=\"$link\">$version</a></span>";
 			$body .= '</li>';
 

@@ -22,6 +22,10 @@ function bootstrap() {
 	if ( ! defined( 'JSDC_PAT' ) ) {
 		add_action( 'admin_init', __NAMESPACE__ . '\\add_pat_setting' );
 	}
+
+	if ( ! defined( 'JSDC_TRANSLATE' ) ) {
+		add_action( 'admin_init', __NAMESPACE__ . '\\add_translate_setting' );
+	}
 }
 
 /**
@@ -96,6 +100,27 @@ function add_pat_setting() {
 }
 
 /**
+ * Register the translate setting and add the field.
+ */
+function add_translate_setting() {
+	add_settings_field(
+		'dc-translate',
+		__( 'Translate changelog to current language ?', 'js-dashboard-changelog' ),
+		__NAMESPACE__ . '\\render_translate_settings_field',
+		'general',
+		'default',
+		[
+			'label_for' => 'dc-translate'
+		]
+	);
+
+	register_setting( 'general', 'dc-translate', [
+		'sanitize_callback' => 'sanitize_text_field',
+		'default' => null,
+	] );
+}
+
+/**
  * Display the input field for the GitHub repository.
  */
 function render_repo_settings_field() {
@@ -125,6 +150,20 @@ function render_pat_settings_field() {
 	<?php
 }
 
+/**
+ * Display the input field for the GitHub personal acess token.
+ */
+function render_translate_settings_field() {
+	$translate = get_option( 'dc-translate' );
+
+	?>
+	<input type="checkbox" id="dc-translate" name="dc-translate" value="1" <?php checked(1, $translate, true); ?> />
+	<p class="description">
+		<?php esc_html_e( 'Automatically translate the changelog to the user\'s locale, using Google Translate API.', 'js-dashboard-changelog' ); ?>
+	</p>
+	<?php
+}
+
 
 /**
  * Get the repository to fetch updates from.
@@ -146,4 +185,15 @@ function get_pat() {
 	}
 
 	return get_option( 'dc-pat' );
+}
+
+/**
+ * Should the changelog automatically be translated ?
+ */
+function should_translate() {
+	if ( defined( 'JSDC_TRANSLATE' ) ) {
+		return \JSDC_TRANSLATE;
+	}
+
+	return get_option( 'dc-translate' );
 }
