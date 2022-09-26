@@ -60,4 +60,4 @@ Global constant that can be used to hard-code the repository. If defined, the se
 ## `JSDC_PAT`
 Global constant that can be used to hard-code the Personal Access Token. If defined, the setting does not display in general settings. This constant can be defined in the `wp-config.php` file or elsewhere.
 
-**Note:** No validation are done at all on these strings, so make sure they're saved in the proper format.
+**Note:** There is no validation done on these strings, so make sure they're saved in the proper format.
