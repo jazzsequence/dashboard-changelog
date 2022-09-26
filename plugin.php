@@ -31,6 +31,13 @@
 
 namespace jazzsequence\DashboardChangelog;
 
+define( 'DC_PLUGIN_ROOT', plugin_dir_path( __FILE__ ) );
+
+$autoload_path = DC_PLUGIN_ROOT . 'vendor/autoload.php';
+
+if ( file_exists( $autoload_path ) ) {
+	require_once $autoload_path;
+}
 require_once __DIR__ . '/inc/api.php';
 require_once __DIR__ . '/inc/namespace.php';
 require_once __DIR__ . '/inc/widget.php';
