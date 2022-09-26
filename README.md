@@ -12,6 +12,7 @@ Adds a GitHub release widget to your WordPress dashboard for a public GitHub rep
 1. Download the zip file, unzip, and upload to your `/wp-content/plugins/` directory.
 2. Activate Dashboard Changelog through the 'Plugins' menu in WordPress.
 3. Go to your General Settings page, and add the repository you'd like to display updates from in <owner>/<repository-name> format (e.g. `jazzsequence/dashboard-changelog`).
+4. If it is a private repository, also add a Github Personal Access token to allow the plugin to fetch data on your behalf. You can get a PAT in your [Github settings](https://github.com/settings/tokens), or by following this [official guide](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
 ## How to use ##
 By default, Dashboard Changelog will pull updates from GitHub _releases_, with the body content of each release acting as content for each update. In order to use, your repository will need to use releases. (The GitHub API endpoint can be modified to use any endpoint that is available, however additional customization would likely need to be done to format the data that gets pulled into the update.) The plugin will pull the 3 most recent releases and cache the API data for 24 hours.
@@ -21,7 +22,7 @@ By default, Dashboard Changelog will pull updates from GitHub _releases_, with t
 ![Dashboard changelog appearance](https://i.imgur.com/HxQ52rS.png)
 [Dashboard Changelog appearance.]
 
-![Dashboard changelog setting](https://i.imgur.com/3Nyhg5m.png)
+![Dashboard changelog setting](https://i.imgur.com/8jWxntT.png)
 [Dashboard Changelog setting in General Settings.]
 
 ## Developer Reference ##
@@ -56,4 +57,7 @@ By default, we display 3 updates (releases) from the API, but this can be update
 ## `JSDC_REPOSITORY`
 Global constant that can be used to hard-code the repository. If defined, the setting does not display in general settings. This constant can be defined in the `wp-config.php` file or elsewhere.
 
-**Note:** No validation is done at all on this string, so make sure it's saved in the proper format.
+## `JSDC_PAT`
+Global constant that can be used to hard-code the PAT. If defined, the setting does not display in general settings. This constant can be defined in the `wp-config.php` file or elsewhere.
+
+**Note:** No validation are done at all on these strings, so make sure they're saved in the proper format.
