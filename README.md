@@ -58,6 +58,6 @@ By default, we display 3 updates (releases) from the API, but this can be update
 Global constant that can be used to hard-code the repository. If defined, the setting does not display in general settings. This constant can be defined in the `wp-config.php` file or elsewhere.
 
 ## `JSDC_PAT`
-Global constant that can be used to hard-code the PAT. If defined, the setting does not display in general settings. This constant can be defined in the `wp-config.php` file or elsewhere.
+Global constant that can be used to hard-code the Personal Access Token. If defined, the setting does not display in general settings. This constant can be defined in the `wp-config.php` file or elsewhere.
 
 **Note:** No validation are done at all on these strings, so make sure they're saved in the proper format.
