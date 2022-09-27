@@ -1,8 +1,8 @@
 name: Build
 on:
-  pull_request:
-    brainches:
-      - main
+  push:
+    tags:
+      - '*'
 
 jobs:
   test:
