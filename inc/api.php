@@ -5,6 +5,7 @@
  * Handles the GitHub API requests
  *
  * @package Dashboard-Changelog
+ * @todo Add more unit tests for API functions.
  */
 
 namespace jazzsequence\DashboardChangelog\API;
