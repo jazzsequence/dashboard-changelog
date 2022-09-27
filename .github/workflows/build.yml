@@ -1,0 +1,54 @@
+name: Build
+on:
+  pull_request:
+    brainches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Lint and Test
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: composer install && npm install
+    - name: Lint
+      run: composer lint
+    - name: Test
+      run: composer test
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    name: Build
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Clear composer cache
+        uses: php-actions/composer@v6
+        with:
+          composer_version: 2
+          command: clearcache
+
+      - name: Install dependencies
+        uses: php-actions/composer@v6
+        with:
+          composer_version: 2
+          php_version: 8.0
+          command: update
+
+      - name: Build
+        run: |
+          composer install --no-dev -o
+          npm install
+          git config --local user.email "robot@dev.null"
+          git config --local user.name "jazzsequence robot"
+          git add -f dist/ vendor/
+          git status
+          git commit -m "Built assets"
+        - name: Push changes
+          uses: ad-m/github-push-action@master
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            branch: ${{ github.ref }}
+            force: true
