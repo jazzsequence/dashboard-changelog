@@ -18,8 +18,9 @@
         "erusev/parsedown": "^1.7"
     },
     "require-dev": {
+        "humanmade/coding-standards": "^1.2",
         "phpunit/phpunit": "^9.5",
         "roots/wordpress": "^5.0",
-        "wp-phpunit/wp-phpunit": "^5.8"
+        "yoast/phpunit-polyfills": "^1.0"
     }
 }
