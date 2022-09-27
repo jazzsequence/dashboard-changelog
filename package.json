@@ -5,7 +5,7 @@
   "main": "plugin.php",
   "scripts": {
     "build": "gulp build",
-    "watch": "gulp watchnpm audit fix"
+    "watch": "gulp watch"
   },
   "repository": {
     "type": "git",
