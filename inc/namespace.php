@@ -30,7 +30,7 @@ function bootstrap() {
  * @return bool
  */
 function parsedown_enabled() : bool {
-	if ( ! class_exists( 'Parsedown' ) ) { var_dump( 'no parsedown' );
+	if ( ! class_exists( 'Parsedown' ) ) {
 		error_log( __( 'Parsedown class does not exist.', 'dashboard-changelog' ) );
 		return false;
 	}
