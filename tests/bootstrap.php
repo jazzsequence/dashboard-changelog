@@ -25,3 +25,12 @@ wp_initial_constants();
 $wp_plugin_paths = [];
 
 require dirname( __DIR__ ) . '/plugin.php';
+
+// Define the options & load them into constants.
+$options = [
+	'repo' => 'jazzsequence/dashboard-changelog',
+	'pat' => '1234567890',
+];
+
+defined( 'JSDC_REPOSITORY' ) or define( 'JSDC_REPOSITORY', $options['repo'] );
+defined( 'JSDC_PAT' ) or define( 'JSDC_PAT', $options['pat'] );

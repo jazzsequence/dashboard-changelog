@@ -11,19 +11,6 @@ namespace jazzsequence\DashboardChangelog;
 use PHPUnit\Framework\TestCase;
 
 class DC_Test_Main extends TestCase {
-	public function setUp() : void {
-		parent::setUp();
-
-		$this->define_constants();
-	}
-
-	private function define_constants() {
-		$options = $this->get_options();
-
-		defined( 'JSDC_REPOSITORY' ) or define( 'JSDC_REPOSITORY', $options['repo'] );
-		defined( 'JSDC_PAT' ) or define( 'JSDC_PAT', $options['pat'] );
-	}
-
 	private function get_options() : array {
 		return [
 			'repo' => 'jazzsequence/dashboard-changelog',
