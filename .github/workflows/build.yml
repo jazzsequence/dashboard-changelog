@@ -1,0 +1,41 @@
+name: Build
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: Lint and Test
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: composer install && npm install
+    - name: Lint
+      run: composer lint
+    - name: Test
+      run: composer phpunit
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    name: Build
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: |
+          composer clear-cache
+          composer install --no-dev -o
+          npm install
+          git config --local user.email "robot@dev.null"
+          git config --local user.name "jazzsequence robot"
+          git add -f dist/ vendor/
+          git status
+          git commit -m "Built assets"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          force: true
