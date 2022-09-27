@@ -10,8 +10,12 @@
         }
     ],
     "scripts": {
-        "phpunit": "vendor/bin/phpunit",
-        "install-wpunit": "bash bin/install-database.sh wordpress root ''"
+        "phpunit": "vendor/bin/phpunit -c phpunit.xml.dist",
+        "install-wpunit": "bash bin/install-database.sh wordpress root ''",
+        "lint:php": "find ./plugin.php ./inc ./tests -name '*.php' -exec php -l {} \\;",
+        "lint:phpcs": "vendor/bin/phpcs -s --standard=phpcs.ruleset.xml",
+        "lint:phpcbf": "vendor/bin/phpcbf -s --standard=phpcs.ruleset.xml",
+        "lint": "composer lint:php && composer lint:phpcs"
     },
     "require": {
         "php": ">=7.4 || >=8.0",
