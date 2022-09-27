@@ -23,15 +23,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
-      - name: Clear composer cache
-        uses: php-actions/composer@v6
-        with:
-          composer_version: 2
-          command: clearcache
-
       - name: Build
         run: |
+          composer clear-cache
           composer install --no-dev -o
           npm install
           git config --local user.email "robot@dev.null"
@@ -39,9 +33,9 @@ jobs:
           git add -f dist/ vendor/
           git status
           git commit -m "Built assets"
-        - name: Push changes
-          uses: ad-m/github-push-action@master
-          with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            branch: ${{ github.ref }}
-            force: true
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          force: true
