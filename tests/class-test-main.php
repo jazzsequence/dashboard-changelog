@@ -11,21 +11,28 @@ namespace jazzsequence\DashboardChangelog;
 use PHPUnit\Framework\TestCase;
 
 class DC_Test_Main extends TestCase {
-	function test_get_vendor_dir() {
-		$this->assertEquals(
-			get_vendor_dir(),
-			dirname( __DIR__ ) . '/vendor/'
-		);
+	private function get_options() : array {
+		return [
+			'repo' => 'jazzsequence/dashboard-changelog',
+			'pat' => '1234567890',
+		];
 	}
 
-	function test_composer_autoloader() {
-		$this->assertEquals(
-			composer_autoloader(),
-			dirname( __DIR__ ) . '/vendor/autoload.php'
-		);
-	}
-
-	function test_parsedown_enabled() {
+	public function test_parsedown_enabled() {
 		$this->assertTrue( parsedown_enabled() );
+	}
+
+	public function test_get_cache_expiration() {
+		$this->assertEquals( DAY_IN_SECONDS, get_cache_expiration() );
+	}
+
+	public function test_get_repository() {
+		$repo = $this->get_options()['repo'];
+		$this->assertEquals( $repo, get_repository() );
+	}
+
+	public function test_get_pat() {
+		$pat = $this->get_options()['pat'];
+		$this->assertEquals( $pat, get_pat() );
 	}
 }

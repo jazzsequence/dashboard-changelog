@@ -4,7 +4,8 @@
   "description": "Adds a GitHub release widget to your WordPress dashboard for a public GitHub repository.",
   "main": "plugin.php",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "gulp build",
+    "watch": "gulp watch"
   },
   "repository": {
     "type": "git",
@@ -28,8 +29,8 @@
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-csso": "^4.0.1",
-    "gulp-sass": "^4.1.0",
-    "gulp-terser": "^2.0.0",
-    "node-sass": "^4.14.1"
+    "gulp-sass": "^5.1",
+    "gulp-terser": "^2.1",
+    "node-sass": "^7.0"
   }
 }

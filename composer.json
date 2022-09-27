@@ -10,22 +10,28 @@
         }
     ],
     "scripts": {
-        "phpunit": "vendor/bin/phpunit",
-        "install-wpunit": "bash bin/install-database.sh wordpress root ''"
+        "phpunit": "vendor/bin/phpunit -c phpunit.xml.dist",
+        "install-wpunit": "bash bin/install-database.sh wordpress root ''",
+        "lint:php": "find ./plugin.php ./inc ./tests -name '*.php' -exec php -l {} \\;",
+        "lint:phpcs": "vendor/bin/phpcs -s --standard=phpcs.ruleset.xml",
+        "lint:phpcbf": "vendor/bin/phpcbf -s --standard=phpcs.ruleset.xml",
+        "lint": "composer lint:php && composer lint:phpcs"
     },
     "require": {
+        "php": ">=7.4 || >=8.0",
         "erusev/parsedown": "^1.7",
-        "php": ">=7.1",
         "stichoza/google-translate-php": "^4.1"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.5",
+        "humanmade/coding-standards": "^1.2",
+        "phpunit/phpunit": "^9.5",
         "roots/wordpress": "^5.0",
-        "wp-phpunit/wp-phpunit": "^5.8"
+        "yoast/phpunit-polyfills": "^1.0"
     },
     "config": {
         "allow-plugins": {
-            "roots/wordpress-core-installer": true
+            "roots/wordpress-core-installer": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     }
 }
