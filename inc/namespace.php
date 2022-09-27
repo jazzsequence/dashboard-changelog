@@ -105,7 +105,7 @@ function add_pat_setting() {
 function add_translate_setting() {
 	add_settings_field(
 		'dc-translate',
-		__( 'Translate changelog to current language ?', 'js-dashboard-changelog' ),
+		__( 'Changelog translation', 'js-dashboard-changelog' ),
 		__NAMESPACE__ . '\\render_translate_settings_field',
 		'general',
 		'default',
@@ -164,10 +164,13 @@ function render_translate_settings_field() {
 	$translate = get_option( 'dc-translate' );
 
 	?>
-	<input type="checkbox" id="dc-translate" name="dc-translate" value="1" <?php checked(1, $translate, true); ?> />
-	<p class="description">
-		<?php esc_html_e( 'Automatically translate the changelog to the user\'s locale, using Google Translate API.', 'js-dashboard-changelog' ); ?>
-	</p>
+	<fieldset>
+		<legend class="screen-reader-text"><span>Changelog translation</span></legend>
+		<label for="dc-translate">
+			<input type="checkbox" id="dc-translate" name="dc-translate" value="1" <?php checked(1, $translate, true); ?> />
+			<?php esc_html_e( 'Automatically translate the changelog to the user\'s locale.', 'js-dashboard-changelog' ); ?>
+		</label>
+	</fieldset>
 	<?php
 }
 
