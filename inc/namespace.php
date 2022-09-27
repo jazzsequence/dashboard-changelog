@@ -158,7 +158,7 @@ function render_pat_settings_field() {
 }
 
 /**
- * Display the input field for the GitHub personal acess token.
+ * Display the input field for the changelog translation.
  */
 function render_translate_settings_field() {
 	$translate = get_option( 'dc-translate' );
