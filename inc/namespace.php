@@ -115,9 +115,16 @@ function add_translate_setting() {
 	);
 
 	register_setting( 'general', 'dc-translate', [
-		'sanitize_callback' => 'sanitize_text_field',
-		'default' => null,
+		'sanitize_callback' => __NAMESPACE__ . '\\sanitize_checkbox',
+		'default' => '',
 	] );
+}
+
+//checkbox sanitization function
+function sanitize_checkbox( $input ){
+		
+	//returns true if checkbox is checked
+	return ( isset( $input ) ? true : false );
 }
 
 /**
