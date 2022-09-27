@@ -8,7 +8,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
-      run: composer install && npm install
+      run: composer install
     - name: Run lint
       run: composer lint
     - name: Run unit tests
