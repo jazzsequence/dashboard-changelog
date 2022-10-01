@@ -8,10 +8,10 @@
 namespace jazzsequence\DashboardChangelog\Widget;
 
 use function jazzsequence\DashboardChangelog\parsedown_enabled;
-use jazzsequence\DashboardChangelog\API;
 use jazzsequence\DashboardChangelog;
-use Stichoza\GoogleTranslate\GoogleTranslate;
+use jazzsequence\DashboardChangelog\API;
 use Parsedown;
+use Stichoza\GoogleTranslate\GoogleTranslate;
 
 /**
  * Initialize the Widget.
@@ -24,7 +24,7 @@ function bootstrap() {
 /**
  * Enqueue the styles, but only on the main WordPress dashboard page.
  *
- * @param string $pagenow
+ * @param string $pagenow Current page
  */
 function enqueue_styles( string $pagenow ) {
 	// Bail if we're not on the dashboard.
@@ -42,10 +42,10 @@ function register_dashboard_widget() {
 	add_meta_box(
 		'js-dashboard-changelog',
 		API\get_code() === 200 ? sprintf( __( '%s Updates', 'js-dashboard-changelog' ), API\get_name() ) : __( 'Error in Dashboard Changelog', 'js-dashboard-changelog' ),
-		 __NAMESPACE__ . '\\render_dashboard_widget',
-		 'dashboard',
-		 'side',
-		 'high'
+		__NAMESPACE__ . '\\render_dashboard_widget',
+		'dashboard',
+		'side',
+		'high'
 	);
 }
 
@@ -95,10 +95,10 @@ function render_dashboard_widget() {
 
 			$body .= '<li class="entry">';
 			$body .= "<h3>$title</h3>";
-			if (DashboardChangelog\should_translate()) {
-				$tr = new GoogleTranslate(get_locale());
+			if ( DashboardChangelog\should_translate() ) {
+				$tr = new GoogleTranslate( get_locale() );
 				$tr->setSource();
-				$body .= $tr->translate($description);
+				$body .= $tr->translate( $description );
 			} else {
 				$body .= $description;
 			}

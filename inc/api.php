@@ -33,22 +33,24 @@ function api_url( string $path = '' ) : string {
 /**
  * Get the API data.
  *
+ * @param string $endpoint API endpoint to fetch
+ *
  * @return array An array of API response data.
  */
 function get_data( string $endpoint = '/releases' ) : array {
 	$response = wp_cache_get( 'dc.api.cached_data' );
 
 	if ( ! $response ) {
-		$repository = DashboardChangelog\get_repository();
-		$pat = DashboardChangelog\get_pat();
-		$args = [
-			'headers'     => [
-				'Authorization' => 'token ' . $pat
-			]
+		$repository    = DashboardChangelog\get_repository();
+		$pat           = DashboardChangelog\get_pat();
+		$args          = [
+			'headers' => [
+				'Authorization' => 'token ' . $pat,
+			],
 		];
-		$response = wp_remote_request( api_url( $repository . $endpoint ), $args );
+		$response      = wp_remote_request( api_url( $repository . $endpoint ), $args );
 		$response_code = $response['response']['code'];
-		$expire = DashboardChangelog\get_cache_expiration();
+		$expire        = DashboardChangelog\get_cache_expiration();
 
 		if ( $response_code === 200 ) {
 			wp_cache_set( 'dc.api.cached_data', $response, null, $expire );
@@ -61,7 +63,7 @@ function get_data( string $endpoint = '/releases' ) : array {
 /**
  * Get the API response code.
  *
- * @param array $response
+ * @param array $response API response
  *
  * @return int The HTTP API Response code.
  */
@@ -81,12 +83,12 @@ function get_body() : array {
 
 	if ( ! $body ) {
 		$response = get_data();
-		$code = get_code();
-		$expire = DashboardChangelog\get_cache_expiration();
+		$code     = get_code();
+		$expire   = DashboardChangelog\get_cache_expiration();
 
 		if ( 200 !== $code ) {
-			$body['code'] = $code;
-			$body['error'] = $response['response']['message'];
+			$body['code']    = $code;
+			$body['error']   = $response['response']['message'];
 			$body['message'] = sprintf( __( 'There was a problem fetching your repository. Check the %1$ssettings%2$s to make sure that you entered it in correctly.', 'js-dashboard-changelog' ), '<a href="options-general.php>', '</a>' );
 
 			return $body;
@@ -111,7 +113,7 @@ function get_name() : string {
 
 	if ( ! $name ) {
 		$response = get_data( '' );
-		$code = get_code( $response );
+		$code     = get_code( $response );
 
 		if ( 200 !== $code ) {
 			return __( 'Error', 'js-dashboard-changelog' );
