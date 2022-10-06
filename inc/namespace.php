@@ -26,6 +26,44 @@ function bootstrap() {
 	if ( ! defined( 'JSDC_ADMIN_NOTICE' ) ) {
 		add_action( 'admin_init', __NAMESPACE__ . '\\add_admin_notice_setting' );
 	}
+
+	add_action( 'init', __NAMESPACE__ . '\\maybe_show_new_release_notice' );
+}
+
+/**
+ * Show an admin notice if there is a new release since user's last visit.
+ *
+ * @return void
+ */
+function maybe_show_new_release_notice() {
+	global $current_user;
+
+	$user_id = $current_user->ID;
+	$releases = API\get_body();
+	$notices = new Notices();
+	$last_viewed_release = get_user_meta( $user_id, 'jsdc_last_viewed_release', true );
+	$last_release = $releases[0]->tag_name;
+	$notice_dismissed = get_user_meta( $user_id, 'jsdc_new_feature', true );
+	// display the notice only if there is a new release since last visit,
+	// or if the last notice shown was not dismissed.
+	if ( $last_release !== $last_viewed_release ||
+	 ( $last_release === $last_viewed_release && ! $notice_dismissed ) ) {
+		$notices->add(
+			'new_feature',
+			sprintf( __( 'Version %s Released!', 'js-dashboard-changelog' ),
+			$last_release ),
+			sprintf( esc_html__( 'See the changes in the "Updates" widget on %s your dashboard%s.', 'js-dashboard-changelog' ),
+			'<a href="/wp-admin">', '</a>' ),
+			[
+				'scope'         => 'user',
+				'type'          => 'success',
+				'alt_style'     => true,
+				'option_prefix' => 'jsdc',
+			]
+		);
+	}
+	update_user_meta( $user_id, 'jsdc_last_viewed_release', $releases[0]->tag_name );
+	$notices->boot();
 }
 
 /**
