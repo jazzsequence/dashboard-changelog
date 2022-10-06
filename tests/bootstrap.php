@@ -30,7 +30,9 @@ require dirname( __DIR__ ) . '/plugin.php';
 $options = [
 	'repo' => 'jazzsequence/dashboard-changelog',
 	'pat' => '1234567890',
+	'admin-notice' => "1",
 ];
 
 defined( 'JSDC_REPOSITORY' ) or define( 'JSDC_REPOSITORY', $options['repo'] );
 defined( 'JSDC_PAT' ) or define( 'JSDC_PAT', $options['pat'] );
+defined( 'JSDC_ADMIN_NOTICE' ) or define( 'JSDC_ADMIN_NOTICE', $options['admin-notice'] );
