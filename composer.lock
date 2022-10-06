@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8d02c0c12e58be85e8cb229a3a86ee9d",
+    "content-hash": "aa8648172adefbb09cd4da8ea397b390",
     "packages": [
         {
             "name": "erusev/parsedown",
@@ -55,6 +55,52 @@
                 "source": "https://github.com/erusev/parsedown/tree/1.7.x"
             },
             "time": "2019-12-30T22:54:17+00:00"
+        },
+        {
+            "name": "wptrt/admin-notices",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/WPTT/admin-notices.git",
+                "reference": "3904e0dc087b48289056a77eea3d1dab4ef0dde1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/WPTT/admin-notices/zipball/3904e0dc087b48289056a77eea3d1dab4ef0dde1",
+                "reference": "3904e0dc087b48289056a77eea3d1dab4ef0dde1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WPTRT\\AdminNotices\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "WordPress.org Theme Review Team",
+                    "email": "themes@wordpress.org",
+                    "homepage": "https://make.wordpress.org/themes",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A class to create admin-notices for the WordPress dashboard.",
+            "homepage": "https://github.com/WPTRT/admin-notices",
+            "keywords": [
+                "wordpress"
+            ],
+            "support": {
+                "issues": "https://github.com/WPTRT/admin-notices/issues",
+                "source": "https://github.com/WPTT/admin-notices/tree/v1.0.3"
+            },
+            "time": "2020-02-15T10:34:51+00:00"
         }
     ],
     "packages-dev": [

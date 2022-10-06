@@ -19,7 +19,8 @@
     },
     "require": {
         "php": ">=7.4 || >=8.0",
-        "erusev/parsedown": "^1.7"
+        "erusev/parsedown": "^1.7",
+        "wptrt/admin-notices": "^1.0"
     },
     "require-dev": {
         "humanmade/coding-standards": "^1.2",
