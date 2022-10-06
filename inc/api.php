@@ -77,9 +77,9 @@ function get_code( array $response = [] ) : int {
  * @return object The body of the API response, or an object containing an error message and information about what went wrong.
  */
 function get_body() : array {
-	$body = wp_cache_get( 'dc.api.cached_body' );
+	$json_body = wp_cache_get( 'dc.api.cached_body' );
 
-	if ( ! $body ) {
+	if ( ! $json_body ) {
 		$response = get_data();
 		$code = get_code();
 		$expire = DashboardChangelog\get_cache_expiration();
@@ -92,11 +92,14 @@ function get_body() : array {
 			return $body;
 		}
 
-		$body = wp_remote_retrieve_body( $response );
-		wp_cache_set( 'dc.api.cached_body', $body, null, $expire );
+		$json_body = wp_remote_retrieve_body( $response );
+		wp_cache_set( 'dc.api.cached_body', $json_body, null, $expire );
 	}
 
-	return json_decode( $body );
+	$body = json_decode( $json_body );
+	do_action( 'jsdc_body_retrieved', $body );
+
+	return $body;
 }
 
 /**
