@@ -83,8 +83,8 @@ function get_body() : array {
 
 	if ( ! $body ) {
 		$response = get_data();
-		$code     = get_code();
-		$expire   = DashboardChangelog\get_cache_expiration();
+		$code = get_code();
+		$expire = DashboardChangelog\get_cache_expiration();
 
 		if ( 200 !== $code ) {
 			$body['code']    = $code;
