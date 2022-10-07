@@ -1,0 +1,35 @@
+# Global Installation: composer global require phpstan/phstan
+# Local Installation: composer require --dev phpstan/phstan
+
+# Usage: phpstan analyze
+
+includes:
+parameters:
+    level: 1
+    inferPrivatePropertyTypeFromConstructor: true
+    # Void as typehints are available only on PHP 7.1+
+    checkMissingIterableValueType: false
+    paths:
+        - ./
+    excludePaths:
+      analyse:
+        - plugins/
+        - vendor/
+        - wordpress/
+      analyseAndScan:
+        - tests/
+        - node_modules/
+    bootstrapFiles:
+        # - tests/bootstrap.php
+    ignoreErrors:
+# Not used in the boilerplate.
+#        # Uses func_get_args()
+       - '#^Function apply_filters invoked with [34567] parameters, 0 required\.$#'
+         #- '#^Function add_action invoked with [34567] parameters, 0 required\.$#'
+#        # https://core.trac.wordpress.org/ticket/43304
+#        - '/^Parameter #2 \$deprecated of function load_plugin_textdomain expects string, false given\.$/'
+#        # WP-CLI accepts a class as callable
+#        - '/^Parameter #2 \$callable of static method WP_CLI::add_command\(\) expects callable\(\): mixed, \S+ given\.$/'
+#        # WP-CLI stubs can be generated and included in "scanFiles:"
+#        # https://github.com/szepeviktor/phpstan-wordpress/blob/master/stub-generators/wp-cli-generate-stubs.sh
+#        - '#on an unknown class WP_CLI\.$#'
