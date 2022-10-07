@@ -43,8 +43,8 @@ function get_data( string $endpoint = '/releases' ) : array {
 		$pat = DashboardChangelog\get_pat();
 		$args = [
 			'headers'     => [
-				'Authorization' => 'token ' . $pat
-			]
+				'Authorization' => 'token ' . $pat,
+			],
 		];
 		$response = wp_remote_request( api_url( $repository . $endpoint ), $args );
 		$response_code = $response['response']['code'];

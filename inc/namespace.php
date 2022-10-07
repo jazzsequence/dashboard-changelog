@@ -2,7 +2,7 @@
 /**
  * Main plugin namespace file.
  *
-* @package Dashboard-Changelog
+ * @package Dashboard-Changelog
  */
 
 namespace jazzsequence\DashboardChangelog;
@@ -64,7 +64,7 @@ function add_repo_setting() {
 		'general',
 		'default',
 		[
-			'label_for' => 'dc-repo'
+			'label_for' => 'dc-repo',
 		]
 	);
 
@@ -85,7 +85,7 @@ function add_pat_setting() {
 		'general',
 		'default',
 		[
-			'label_for' => 'dc-pat'
+			'label_for' => 'dc-pat',
 		]
 	);
 
@@ -124,7 +124,6 @@ function render_pat_settings_field() {
 	</p>
 	<?php
 }
-
 
 /**
  * Get the repository to fetch updates from.

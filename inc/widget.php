@@ -40,16 +40,18 @@ function register_dashboard_widget() {
 	add_meta_box(
 		'js-dashboard-changelog',
 		API\get_code() === 200 ? sprintf( __( '%s Updates', 'js-dashboard-changelog' ), API\get_name() ) : __( 'Error in Dashboard Changelog', 'js-dashboard-changelog' ),
-		 __NAMESPACE__ . '\\render_dashboard_widget',
-		 'dashboard',
-		 'side',
-		 'high'
+		__NAMESPACE__ . '\\render_dashboard_widget',
+		'dashboard',
+		'side',
+		'high'
 	);
 }
 
 /**
  * Display the dashboard widget.
  * Widget displays the 3 most recent GitHub releases.
+ *
+ * @return null
  */
 function render_dashboard_widget() {
 	$parsedown = new Parsedown();

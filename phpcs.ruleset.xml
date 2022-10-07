@@ -9,7 +9,6 @@
 	<exclude-pattern>node_modules/*</exclude-pattern>
 	<exclude-pattern>bin/*</exclude-pattern>
 	<exclude-pattern>dist/*</exclude-pattern>
-	<exclude-pattern>.*/*</exclude-pattern>
 
 	<!-- Use HM Coding Standards -->
 	<rule ref="vendor/humanmade/coding-standards">
