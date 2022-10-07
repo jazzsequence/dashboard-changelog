@@ -30,7 +30,7 @@ require dirname( __DIR__ ) . '/plugin.php';
 $options = [
 	'repo' => 'jazzsequence/dashboard-changelog',
 	'pat' => '1234567890',
-	'translate' => "1",
+	'translate' => '1',
 ];
 
 defined( 'JSDC_REPOSITORY' ) or define( 'JSDC_REPOSITORY', $options['repo'] );
