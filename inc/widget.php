@@ -40,16 +40,18 @@ function register_dashboard_widget() {
 	add_meta_box(
 		'js-dashboard-changelog',
 		API\get_code() === 200 ? sprintf( __( '%s Updates', 'js-dashboard-changelog' ), API\get_name() ) : __( 'Error in Dashboard Changelog', 'js-dashboard-changelog' ),
-		 __NAMESPACE__ . '\\render_dashboard_widget',
-		 'dashboard',
-		 'side',
-		 'high'
+		__NAMESPACE__ . '\\render_dashboard_widget',
+		'dashboard',
+		'side',
+		'high'
 	);
 }
 
 /**
  * Display the dashboard widget.
  * Widget displays the 3 most recent GitHub releases.
+ *
+ * @return null
  */
 function render_dashboard_widget() {
 	$parsedown = new Parsedown();
@@ -86,9 +88,33 @@ function render_dashboard_widget() {
 			}
 
 			$title = $update->name;
+			/**
+			 * Filters the release title.
+			 *
+			 * @param string  $title Release title.
+			 */
+			$title = apply_filters( 'jsdc-release-title', $title );
+
 			$version = $update->tag_name;
+			/**
+			 * Filters the release version tag.
+			 *
+			 * @param string  $version Release version.
+			 */
+			$version = apply_filters( 'jsdc-release-version', $version );
+
 			// If we have Parsedown, use it. Otherwise just use wpautop for basic parsing.
 			$description = parsedown_enabled() ? $parsedown->text( $update->body ) : wpautop( $update->body );
+			/**
+			 * Filters the release description.
+			 *
+			 * @param string  $description Release description.
+			 */
+			$description = apply_filters(
+				'jsdc-release-description',
+				$description
+			);
+
 			$link = $update->html_url;
 
 			$body .= '<li class="entry">';
