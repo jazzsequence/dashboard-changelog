@@ -15,6 +15,7 @@ class DC_Test_Main extends TestCase {
 		return [
 			'repo' => 'jazzsequence/dashboard-changelog',
 			'pat' => '1234567890',
+			'translate' => '1',
 		];
 	}
 
@@ -35,4 +36,10 @@ class DC_Test_Main extends TestCase {
 		$pat = $this->get_options()['pat'];
 		$this->assertEquals( $pat, get_pat() );
 	}
+
+	public function test_should_translate() {
+		$translate = $this->get_options()['translate'];
+		$this->assertEquals( $translate, should_translate() );
+	}
+
 }
