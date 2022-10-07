@@ -2,7 +2,7 @@
 /**
  * Main plugin namespace file.
  *
-* @package Dashboard-Changelog
+ * @package Dashboard-Changelog
  */
 
 namespace jazzsequence\DashboardChangelog;
@@ -21,6 +21,10 @@ function bootstrap() {
 
 	if ( ! defined( 'JSDC_PAT' ) ) {
 		add_action( 'admin_init', __NAMESPACE__ . '\\add_pat_setting' );
+	}
+
+	if ( ! defined( 'JSDC_TRANSLATE' ) ) {
+		add_action( 'admin_init', __NAMESPACE__ . '\\add_translate_setting' );
 	}
 }
 
@@ -64,14 +68,18 @@ function add_repo_setting() {
 		'general',
 		'default',
 		[
-			'label_for' => 'dc-repo'
+			'label_for' => 'dc-repo',
 		]
 	);
 
-	register_setting( 'general', 'dc-repo', [
-		'sanitize_callback' => 'sanitize_text_field',
-		'default' => null,
-	] );
+	register_setting(
+		'general',
+		'dc-repo',
+		[
+			'sanitize_callback' => 'sanitize_text_field',
+			'default'           => null,
+		]
+	);
 }
 
 /**
@@ -85,14 +93,53 @@ function add_pat_setting() {
 		'general',
 		'default',
 		[
-			'label_for' => 'dc-pat'
+			'label_for' => 'dc-pat',
 		]
 	);
 
-	register_setting( 'general', 'dc-pat', [
-		'sanitize_callback' => 'sanitize_text_field',
-		'default' => null,
-	] );
+	register_setting(
+		'general',
+		'dc-pat',
+		[
+			'sanitize_callback' => 'sanitize_text_field',
+			'default'           => null,
+		]
+	);
+}
+
+/**
+ * Register the translate setting and add the field.
+ */
+function add_translate_setting() {
+	add_settings_field(
+		'dc-translate',
+		__( 'Changelog translation', 'js-dashboard-changelog' ),
+		__NAMESPACE__ . '\\render_translate_settings_field',
+		'general',
+		'default',
+		[
+			'label_for' => 'dc-translate',
+		]
+	);
+
+	register_setting(
+		'general',
+		'dc-translate',
+		[
+			'sanitize_callback' => __NAMESPACE__ . '\\sanitize_checkbox',
+			'default'           => '',
+		]
+	);
+}
+
+/**
+ * Checkbox sanitization function
+ *
+ * @param string $input checkbox value to sanitize
+ */
+function sanitize_checkbox( $input ) {
+
+	return ( isset( $input ) ? true : false );
 }
 
 /**
@@ -125,6 +172,22 @@ function render_pat_settings_field() {
 	<?php
 }
 
+/**
+ * Display the input field for the changelog translation.
+ */
+function render_translate_settings_field() {
+	$translate = get_option( 'dc-translate' );
+
+	?>
+	<fieldset>
+		<legend class="screen-reader-text"><span>Changelog translation</span></legend>
+		<label for="dc-translate">
+			<input type="checkbox" id="dc-translate" name="dc-translate" value="1" <?php checked( 1, $translate, true ); ?> />
+			<?php esc_html_e( 'Automatically translate the changelog to the user\'s locale.', 'js-dashboard-changelog' ); ?>
+		</label>
+	</fieldset>
+	<?php
+}
 
 /**
  * Get the repository to fetch updates from.
@@ -146,4 +209,15 @@ function get_pat() {
 	}
 
 	return get_option( 'dc-pat' );
+}
+
+/**
+ * Should the changelog automatically be translated ?
+ */
+function should_translate() {
+	if ( defined( 'JSDC_TRANSLATE' ) ) {
+		return \JSDC_TRANSLATE;
+	}
+
+	return get_option( 'dc-translate' );
 }

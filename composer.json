@@ -1,5 +1,5 @@
 {
-    "name": "jazzsequence/dashboard-changelog",
+    "name": "digital-swing/dashboard-changelog",
     "description": "Adds a GitHub release widget to your WordPress dashboard for a public GitHub repository.",
     "type": "wordpress-plugin",
     "license": "GPL-3.0-or-later",
@@ -19,7 +19,8 @@
     },
     "require": {
         "php": ">=7.4 || >=8.0",
-        "erusev/parsedown": "^1.7"
+        "erusev/parsedown": "^1.7",
+        "stichoza/google-translate-php": "^4.1"
     },
     "require-dev": {
         "humanmade/coding-standards": "^1.2",
